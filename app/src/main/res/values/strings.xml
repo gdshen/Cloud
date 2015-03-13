@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">云与图</string>
+
+    <string name="dummy_content">云\n与图</string>
+    <string name="team_name">\@blooping</string>
+    <string name="title_activity_album">图库</string>
+
+    <string name="hello_world">你好,世界!</string>
+    <string name="action_settings">设置</string>
+</resources>
