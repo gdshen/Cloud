@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import tk.gdshen.cloud.R;
+import tk.gdshen.cloud.helpers.Constants;
 
 public class StartActivity extends Activity {
 
@@ -17,6 +18,11 @@ public class StartActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_start);
+
+        //初始化一些全局变量
+        Constants.fileList = Constants.getFileList();
+
+        //作为启动界面跳转到主界面
         new Handler().postDelayed(new Runnable(){
 
             @Override
