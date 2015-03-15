@@ -2,5 +2,8 @@
 
     <color name="black_overlay">#66000000</color>
     <color name="primary_blue">#ff2396f3</color>
+    <color name="primary">#E91e63</color>
+    <color name="primary_pressed">#AD1457</color>
+    <color name="ripple">#F48F81</color>
 
 </resources>

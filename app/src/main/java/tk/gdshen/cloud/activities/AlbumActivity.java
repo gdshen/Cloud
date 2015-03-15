@@ -2,16 +2,12 @@ package tk.gdshen.cloud.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.GridLayout;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import tk.gdshen.cloud.R;
 import tk.gdshen.cloud.adapters.AlbumAdapter;
@@ -30,12 +26,13 @@ public class AlbumActivity extends ActionBarActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String filePath = (String)adapterView.getItemAtPosition(i);
+                String filePath = (String) adapterView.getItemAtPosition(i);
                 Intent intent = new Intent(AlbumActivity.this, LocalPhotoDetailActivity.class);
                 intent.putExtra("filePath", filePath);
                 startActivity(intent);
             }
         });
+
     }
 
 
