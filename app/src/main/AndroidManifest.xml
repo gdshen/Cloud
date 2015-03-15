@@ -30,6 +30,14 @@
             android:name=".activities.AlbumActivity"
             android:label="@string/title_activity_album" >
         </activity>
+        <activity
+            android:name=".activities.LocalPhotoDetailActivity"
+            android:label="@string/title_activity_local_photo_detail"
+            android:parentActivityName=".activities.AlbumActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="tk.gdshen.cloud.activities.AlbumActivity" />
+        </activity>
     </application>
 
 </manifest>

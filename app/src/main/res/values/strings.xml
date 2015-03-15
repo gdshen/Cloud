@@ -7,4 +7,5 @@
 
     <string name="hello_world">你好,世界!</string>
     <string name="action_settings">设置</string>
+    <string name="title_activity_local_photo_detail">本地图库</string>
 </resources>
