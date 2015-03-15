@@ -8,6 +8,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
+
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import tk.gdshen.cloud.R;
 import tk.gdshen.cloud.adapters.AlbumAdapter;
@@ -33,6 +36,22 @@ public class AlbumActivity extends ActionBarActivity {
             }
         });
 
+        FloatingActionButton connectVdiskButton = (FloatingActionButton) findViewById(R.id.connectVdiskButton);
+        FloatingActionButton transformButton = (FloatingActionButton) findViewById(R.id.transformButton);
+
+        connectVdiskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"点击了连接到我的微云", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        transformButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"点击了进行变换", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
