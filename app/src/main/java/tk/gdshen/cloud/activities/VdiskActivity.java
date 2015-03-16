@@ -199,7 +199,7 @@ public class VdiskActivity extends ActionBarActivity implements VDiskDialogListe
 //                                list.add(entry.fileName() + "("
 //                                        + getString(R.string.adir) + ")");
                             } else {
-                                list.add(Constants.CLOUDPICTURE + entry.fileName());
+                                list.add(entry.fileName());
                                 Log.d(Constants.TAG, list.get(0));
                             }
                         }

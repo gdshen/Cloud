@@ -15,6 +15,16 @@ public class Constants {
 
     public final static String CLOUDPICTURE = "/picture/";
 
+    public final static String localThumbnail = Environment
+            .getExternalStorageDirectory()
+            .getAbsolutePath()
+            + "/VdiskThumbnail/";
+
+    public final static String localDetailImage = Environment
+            .getExternalStorageDirectory()
+            .getAbsolutePath()
+            + "/VdiskDetail/";
+
     public static ArrayList<String> fileList;
 
     //微盘登录认证的部分常量

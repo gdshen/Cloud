@@ -5,3 +5,4 @@
 4. 加入变换算法
 5. 初始化的时候在微云中建立picture文件夹
 6. 初始化的时候在android中建立变换文件夹
+7. 建立VdiskThumbnail文件夹
