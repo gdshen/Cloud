@@ -13,6 +13,8 @@ public class Constants {
 
     public final static String TAG = "SGD_Debuging";
 
+    public final static String CLOUDPICTURE = "/picture/";
+
     public static ArrayList<String> fileList;
 
     //微盘登录认证的部分常量

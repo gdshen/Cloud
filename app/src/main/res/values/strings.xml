@@ -14,4 +14,5 @@
     <string name="be_uploading">正在上传</string>
     <string name="be_cancel">取消</string>
     <string name="suc_up_file">文件已经成功上传</string>
+    <string name="title_activity_vdisk_gallery">VdiskGalleryActivity</string>
 </resources>
