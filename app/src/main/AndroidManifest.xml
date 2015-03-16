@@ -38,6 +38,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="tk.gdshen.cloud.activities.AlbumActivity" />
         </activity>
+        <activity
+            android:name=".activities.VdiskActivity"
+            android:label="@string/title_activity_vdisk"
+            android:parentActivityName=".activities.AlbumActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="tk.gdshen.cloud.activities.AlbumActivity" />
+        </activity>
+        <activity
+            android:name=".activities.TransformAndUploadActivity"
+            android:label="@string/title_activity_transform_and_upload"
+            android:parentActivityName=".activities.AlbumActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="tk.gdshen.cloud.activities.AlbumActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -43,6 +43,8 @@ public class AlbumActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(),"点击了连接到我的微云", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AlbumActivity.this, VdiskActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -50,6 +52,8 @@ public class AlbumActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(),"点击了进行变换", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AlbumActivity.this, TransformAndUploadActivity.class);
+                startActivity(intent);
             }
         });
     }

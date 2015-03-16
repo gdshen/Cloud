@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/home/gdshen/AndroidStudioProjects/Cloud/vDiskSdk/build/intermediates/bundles/debug/res/values/values.xml -->
+    <eat-comment/>
+    <color name="black">#ff000000</color>
+    <color name="gray">#4A4D4A</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffffff</color>
+    <dimen name="dialog_bottom_margin">10dp</dimen>
+    <dimen name="dialog_btn_close_right_margin">10dp</dimen>
+    <dimen name="dialog_btn_close_top_margin">10dp</dimen>
+    <dimen name="dialog_left_margin">3dp</dimen>
+    <dimen name="dialog_right_margin">3dp</dimen>
+    <dimen name="dialog_title_height">30dp</dimen>
+    <dimen name="dialog_title_logo_left_margin">5dp</dimen>
+    <dimen name="dialog_top_margin">30dp</dimen>
+    <string name="app_name">微盘Sdk</string>
+    <string name="defaultlocale">DefaultLocale</string>
+    <style name="ContentOverlay" parent="android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustResize</item>
+    </style>
+</resources>

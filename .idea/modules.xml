@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Cloud.iml" filepath="$PROJECT_DIR$/Cloud.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vDiskSdk/vDiskSdk.iml" filepath="$PROJECT_DIR$/vDiskSdk/vDiskSdk.iml" />
     </modules>
   </component>
 </project>

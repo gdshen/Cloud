@@ -5,7 +5,13 @@
     <string name="team_name">\@blooping</string>
     <string name="title_activity_album">图库</string>
 
-    <string name="hello_world">你好,世界!</string>
+    <string name="hello_world">你好,用户!</string>
     <string name="action_settings">设置</string>
     <string name="title_activity_local_photo_detail">本地图库</string>
+    <string name="title_activity_vdisk">VdiskActivity</string>
+    <string name="title_activity_transform_and_upload">TransformAndUploadActivity</string>
+    <string name="button_upload">上传</string>
+    <string name="be_uploading">正在上传</string>
+    <string name="be_cancel">取消</string>
+    <string name="suc_up_file">文件已经成功上传</string>
 </resources>
