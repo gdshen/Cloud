@@ -42,7 +42,7 @@ public class TransformAndUploadActivity extends ActionBarActivity  implements VD
         session.setRedirectUrl(Constants.REDIRECT_URL);
         session.authorize(TransformAndUploadActivity.this, TransformAndUploadActivity.this);
 
-        mApi = new VDiskAPI<>(session);g
+        mApi = new VDiskAPI<>(session);
         Button button = (Button) findViewById(R.id.upload_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
