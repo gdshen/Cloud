@@ -15,15 +15,12 @@ public class Constants {
 
     public final static String CLOUDPICTURE = "/picture/";
 
-    public final static String localThumbnail = Environment
-            .getExternalStorageDirectory()
-            .getAbsolutePath()
-            + "/VdiskThumbnail/";
+    public final static String cloud = Environment.getExternalStorageDirectory().getAbsolutePath()
+            + "/cn.ustc.edu.o0ping";
 
-    public final static String localDetailImage = Environment
-            .getExternalStorageDirectory()
-            .getAbsolutePath()
-            + "/VdiskDetail/";
+    public final static String localThumbnail = cloud + "/.thumbnail";
+
+    public final static String localDetailImage = cloud+ "/imageDetail";
 
     public static ArrayList<String> fileList;
 

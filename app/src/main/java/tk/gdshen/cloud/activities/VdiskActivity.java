@@ -69,7 +69,9 @@ public class VdiskActivity extends ActionBarActivity implements VDiskDialogListe
         appKeyPair = new AppKeyPair(Constants.CONSUMER_KEY, Constants.CONSUMER_SECRET);
         session = VDiskAuthSession.getInstance(this, appKeyPair, Session.AccessType.APP_FOLDER);
         session.setRedirectUrl(Constants.REDIRECT_URL);
-        session.authorize(VdiskActivity.this, VdiskActivity.this);
+        if(!session.isLinked()) {
+            session.authorize(VdiskActivity.this, VdiskActivity.this);
+        }
 
         mApi = new VDiskAPI<>(session);
 //        getAccountInfo(); 获取用户信息

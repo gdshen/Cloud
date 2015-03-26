@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+
+import java.io.File;
 
 import tk.gdshen.cloud.R;
 import tk.gdshen.cloud.helpers.Constants;
@@ -22,6 +25,8 @@ public class StartActivity extends Activity {
         //初始化一些全局变量
         Constants.fileList = Constants.getFileList();
 
+        fileCreator();
+
         //作为启动界面跳转到主界面
         new Handler().postDelayed(new Runnable(){
 
@@ -33,5 +38,38 @@ public class StartActivity extends Activity {
             }
 
         }, SPLASH_DISPLAY_LENGTH);
+    }
+
+    private void fileCreator(){
+
+        //在初始化的代码中加入对于应用程序相对应的文件夹是否存在的检测，如果不存在，就新建一个
+        File cloudDirectory = new File(Constants.cloud);
+        File thumbnail = new File(Constants.localThumbnail);
+        File imageDetail = new File(Constants.localDetailImage);
+
+        if( !cloudDirectory.exists()){
+            cloudDirectory.mkdirs();
+            Log.d(Constants.TAG, Constants.cloud + "已完成创建");
+        }
+        else{
+            Log.d(Constants.TAG,Constants.cloud + "文件夹已经创建");
+        }
+
+        if( !thumbnail.exists()){
+            thumbnail.mkdirs();
+            Log.d(Constants.TAG, Constants.localThumbnail + "已完成创建");
+        }
+        else{
+            Log.d(Constants.TAG,Constants.localThumbnail + "文件夹已经创建");
+        }
+
+        if( !imageDetail.exists()){
+            imageDetail.mkdirs();
+            Log.d(Constants.TAG, Constants.localDetailImage + "已完成创建");
+        }
+        else{
+            Log.d(Constants.TAG,Constants.localDetailImage + "文件夹已经创建");
+        }
+
     }
 }

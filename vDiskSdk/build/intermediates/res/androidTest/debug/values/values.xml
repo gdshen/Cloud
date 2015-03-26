@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/gdshen/AndroidStudioProjects/Cloud/vDiskSdk/build/intermediates/bundles/debug/res/values/values.xml -->
+    <!-- From: file:/Users/shen/AndroidStudioProjects/Cloud/vDiskSdk/build/intermediates/bundles/debug/res/values/values.xml -->
     <eat-comment/>
     <color name="black">#ff000000</color>
     <color name="gray">#4A4D4A</color>
