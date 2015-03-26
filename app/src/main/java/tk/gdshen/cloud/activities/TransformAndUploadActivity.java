@@ -1,6 +1,5 @@
 package tk.gdshen.cloud.activities;
 
-import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,7 +7,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.vdisk.android.VDiskAuthSession;
 import com.vdisk.android.VDiskDialogListener;
 import com.vdisk.net.VDiskAPI;
@@ -31,6 +33,7 @@ public class TransformAndUploadActivity extends ActionBarActivity  implements VD
 
     VDiskAPI.Account account;
     VDiskAPI<VDiskAuthSession> mApi;
+    boolean tranformState = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,17 +43,43 @@ public class TransformAndUploadActivity extends ActionBarActivity  implements VD
         appKeyPair = new AppKeyPair(Constants.CONSUMER_KEY, Constants.CONSUMER_SECRET);
         session = VDiskAuthSession.getInstance(this,appKeyPair, Session.AccessType.APP_FOLDER);
         session.setRedirectUrl(Constants.REDIRECT_URL);
-        session.authorize(TransformAndUploadActivity.this, TransformAndUploadActivity.this);
+        if(!session.isLinked()) {
+            session.authorize(TransformAndUploadActivity.this, TransformAndUploadActivity.this);
+        }
 
         mApi = new VDiskAPI<>(session);
-        Button button = (Button) findViewById(R.id.upload_button);
+        final Button button = (Button) findViewById(R.id.upload_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String srcPath = Constants.fileList.get(0);
-                Log.d(Constants.TAG, srcPath);
-                String desPath = "/picture";
-                uploadLargeFile(srcPath, desPath);
+//                String srcPath = Constants.fileList.get(0);
+//                Log.d(Constants.TAG, srcPath);
+//                String desPath = "/picture";
+//                uploadLargeFile(srcPath, desPath);
+                if(tranformState){
+                    tranformState = !tranformState;
+                    button.setText(R.string.button_upload);
+                }
+                else {
+                    tranformState = !tranformState;
+//                    button.setText(R.string.button_tranform);
+                }
+            }
+        });
+        ImageView secretImage = (ImageView) findViewById(R.id.secretImage);
+        Picasso.with(this).load(R.mipmap.ic_launcher).into(secretImage);
+        secretImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"点击了选择秘密图片",Toast.LENGTH_SHORT).show();
+            }
+        });
+        ImageView coverImage = (ImageView) findViewById(R.id.coverImage);
+        Picasso.with(this).load(R.mipmap.ic_launcher).into(coverImage);
+        coverImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"点击了选择掩体图片",Toast.LENGTH_SHORT).show();
             }
         });
     }

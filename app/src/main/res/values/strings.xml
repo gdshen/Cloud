@@ -6,6 +6,7 @@
     <string name="title_activity_album">图库</string>
 
     <string name="hello_world">你好,用户!</string>
+    <string name="please_waiting">用户，您好，请稍等</string>
     <string name="action_settings">设置</string>
     <string name="title_activity_local_photo_detail">本地图库</string>
     <string name="title_activity_vdisk">VdiskActivity</string>
@@ -15,4 +16,7 @@
     <string name="be_cancel">取消</string>
     <string name="suc_up_file">文件已经成功上传</string>
     <string name="title_activity_vdisk_gallery">VdiskGalleryActivity</string>
+    <string name="choose_secret">请选择秘密图片</string>
+    <string name="choose_cover">请选择掩体图片</string>
+    <string name="button_tranform">变换</string>
 </resources>

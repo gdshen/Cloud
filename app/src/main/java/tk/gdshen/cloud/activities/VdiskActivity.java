@@ -76,6 +76,7 @@ public class VdiskActivity extends ActionBarActivity implements VDiskDialogListe
         mApi = new VDiskAPI<>(session);
 //        getAccountInfo(); 获取用户信息
         // todo 获取文件夹的信息
+        // todo 取消连接到我的微盘需要使用两个acitivity
         getMetaData("/picture",0);
 
 
