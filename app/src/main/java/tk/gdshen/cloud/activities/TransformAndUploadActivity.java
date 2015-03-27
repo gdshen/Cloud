@@ -83,7 +83,7 @@ public class TransformAndUploadActivity extends ActionBarActivity implements VDi
                     tranformState = !tranformState;
                     tranformedFilePath += "/" + random.nextInt(10000)+".jpg";
                     Log.d("transformFIlePath", tranformedFilePath);
-                    TransformHelper.encryptJPEG(secretPath, coverPath, tranformedFilePath, "1");
+                    TransformHelper.EncryptJPEG(secretPath, coverPath, tranformedFilePath, "1");
                     // 执行transform变换函数
                     Picasso.with(getApplicationContext()).load(new File(tranformedFilePath)).centerCrop().fit().into(secretImage);
                     secretTextView.setText("变换后的图片");
