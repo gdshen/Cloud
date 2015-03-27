@@ -1,5 +1,10 @@
 package tk.gdshen.cloud.activities;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,12 +26,13 @@ import com.vdisk.net.session.AppKeyPair;
 import com.vdisk.net.session.Session;
 
 import java.io.File;
+import java.util.Random;
 
 import tk.gdshen.cloud.R;
 import tk.gdshen.cloud.helpers.Constants;
 import tk.gdshen.cloud.helpers.LargeFileUpload;
 
-public class TransformAndUploadActivity extends ActionBarActivity  implements VDiskDialogListener{
+public class TransformAndUploadActivity extends ActionBarActivity implements VDiskDialogListener {
 
     VDiskAuthSession session;
     AppKeyPair appKeyPair;
@@ -35,20 +41,34 @@ public class TransformAndUploadActivity extends ActionBarActivity  implements VD
     VDiskAPI<VDiskAuthSession> mApi;
     boolean tranformState = true;
 
+    public final int REQUEST_CODE_IMAGE_SECRET = 1;
+
+    public final int REQUEST_CODE_IMAGE_COVER = 2;
+
+    ImageView secretImage;
+    ImageView coverImage;
+
+    String secretPath;
+    String coverPath;
+    String tranformedFilePath = Constants.cloud;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transform_and_upload);
-
+        coverImage = (ImageView) findViewById(R.id.coverImage);
+        secretImage = (ImageView) findViewById(R.id.secretImage);
         appKeyPair = new AppKeyPair(Constants.CONSUMER_KEY, Constants.CONSUMER_SECRET);
-        session = VDiskAuthSession.getInstance(this,appKeyPair, Session.AccessType.APP_FOLDER);
+        session = VDiskAuthSession.getInstance(this, appKeyPair, Session.AccessType.APP_FOLDER);
         session.setRedirectUrl(Constants.REDIRECT_URL);
-        if(!session.isLinked()) {
+        if (!session.isLinked()) {
             session.authorize(TransformAndUploadActivity.this, TransformAndUploadActivity.this);
         }
 
         mApi = new VDiskAPI<>(session);
         final Button button = (Button) findViewById(R.id.upload_button);
+
+        final Random random = new Random(System.currentTimeMillis());
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,30 +76,36 @@ public class TransformAndUploadActivity extends ActionBarActivity  implements VD
 //                Log.d(Constants.TAG, srcPath);
 //                String desPath = "/picture";
 //                uploadLargeFile(srcPath, desPath);
-                if(tranformState){
+                if (tranformState) {
                     tranformState = !tranformState;
+                    tranformedFilePath += "/" + random.nextInt();
+                    // 执行transform变换函数
                     button.setText(R.string.button_upload);
-                }
-                else {
+                } else {
                     tranformState = !tranformState;
-//                    button.setText(R.string.button_tranform);
+                    String desPath = "/picture";
+                    uploadLargeFile(tranformedFilePath,desPath);
                 }
             }
         });
-        ImageView secretImage = (ImageView) findViewById(R.id.secretImage);
+
         Picasso.with(this).load(R.mipmap.ic_launcher).into(secretImage);
         secretImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"点击了选择秘密图片",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "点击了选择秘密图片", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, REQUEST_CODE_IMAGE_SECRET);
             }
         });
-        ImageView coverImage = (ImageView) findViewById(R.id.coverImage);
+
         Picasso.with(this).load(R.mipmap.ic_launcher).into(coverImage);
         coverImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"点击了选择掩体图片",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "点击了选择掩体图片", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, REQUEST_CODE_IMAGE_COVER);
             }
         });
     }
@@ -133,17 +159,39 @@ public class TransformAndUploadActivity extends ActionBarActivity  implements VD
 
     /**
      * 分段上传大文件
-     *
+     * <p/>
      * Upload a large file
      *
-     * @param srcPath
-     *            本地文件的路径 Source path of local file
-     * @param desPath
-     *            云端目标文件的文件夹路径 Target directory path of file in the cloud
+     * @param srcPath 本地文件的路径 Source path of local file
+     * @param desPath 云端目标文件的文件夹路径 Target directory path of file in the cloud
      */
     private void uploadLargeFile(String srcPath, String desPath) {
         File file = new File(srcPath);
         LargeFileUpload upload = new LargeFileUpload(this, mApi, desPath, file);
         upload.execute();
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            Uri uri = data.getData();
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                String path = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA));
+                Log.d("get path", path);
+                switch (requestCode){
+                    case REQUEST_CODE_IMAGE_SECRET: {
+                        secretPath = path;
+                        Picasso.with(this).load(new File(path)).into(secretImage);
+                        break;
+                    }
+                    case REQUEST_CODE_IMAGE_COVER: {
+                        coverPath = path;
+                        Picasso.with(this).load(new File(path)).into(coverImage);
+                        break;
+                    }
+                }
+            }
+        }
     }
 }

@@ -6,7 +6,7 @@
     <string name="title_activity_album">图库</string>
 
     <string name="hello_world">你好,用户!</string>
-    <string name="please_waiting">用户，您好，请稍等</string>
+    <string name="please_waiting">用户，您好，请稍等,正在为您跳转到微盘中的图库界面</string>
     <string name="action_settings">设置</string>
     <string name="title_activity_local_photo_detail">本地图库</string>
     <string name="title_activity_vdisk">VdiskActivity</string>
