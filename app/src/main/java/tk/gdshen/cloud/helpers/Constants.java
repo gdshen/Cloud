@@ -36,8 +36,17 @@ public class Constants {
         String imageDirectory = Environment.getExternalStorageDirectory().getAbsolutePath() + "/DCIM";
         File fileList = new File(imageDirectory);
         for (File file : fileList.listFiles()) {
-            if (file.getName().endsWith("jpg") && !file.isDirectory()) {
+            if (file.getName().endsWith(".jpg") && !file.isDirectory() && !file.getName().endsWith(".thumbnails")) {
                 stringArrayList.add(file.getAbsolutePath());
+            }
+            //将子文件夹下得图片加入到图片列表中国
+            if(file.isDirectory() && !file.getName().endsWith(".thumbnails")){
+                for(File subFile:file.listFiles()) {
+                    if (subFile.getName().endsWith("jpg") && !subFile.isDirectory()) {
+                        stringArrayList.add(subFile.getAbsolutePath());
+                        Log.d(TAG, subFile.getAbsolutePath());
+                    }
+                }
             }
         }
         return stringArrayList;

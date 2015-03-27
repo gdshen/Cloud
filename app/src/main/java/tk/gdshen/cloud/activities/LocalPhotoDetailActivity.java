@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -22,6 +23,7 @@ public class LocalPhotoDetailActivity extends ActionBarActivity {
         setTitle(filePath);
         ImageView imageView = (ImageView) findViewById(R.id.localImage);
         Picasso.with(getApplicationContext()).load(new File(filePath)).centerCrop().fit().into(imageView);
+        Toast.makeText(this,filePath,Toast.LENGTH_LONG).show();
     }
 
 
