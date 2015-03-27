@@ -13,7 +13,7 @@ public class Constants {
 
     public final static String TAG = "SGD_Debuging";
 
-    public final static String CLOUDPICTURE = "/picture/";
+    public final static String CLOUDPICTURE = "/";
 
     public final static String cloud = Environment.getExternalStorageDirectory().getAbsolutePath()
             + "/cn.ustc.edu.o0ping";

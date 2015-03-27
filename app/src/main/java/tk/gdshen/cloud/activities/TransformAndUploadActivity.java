@@ -3,7 +3,6 @@ package tk.gdshen.cloud.activities;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -13,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -31,6 +31,7 @@ import java.util.Random;
 import tk.gdshen.cloud.R;
 import tk.gdshen.cloud.helpers.Constants;
 import tk.gdshen.cloud.helpers.LargeFileUpload;
+import tk.gdshen.cloud.helpers.TransformHelper;
 
 public class TransformAndUploadActivity extends ActionBarActivity implements VDiskDialogListener {
 
@@ -47,6 +48,7 @@ public class TransformAndUploadActivity extends ActionBarActivity implements VDi
 
     ImageView secretImage;
     ImageView coverImage;
+    TextView secretTextView;
 
     String secretPath;
     String coverPath;
@@ -58,6 +60,7 @@ public class TransformAndUploadActivity extends ActionBarActivity implements VDi
         setContentView(R.layout.activity_transform_and_upload);
         coverImage = (ImageView) findViewById(R.id.coverImage);
         secretImage = (ImageView) findViewById(R.id.secretImage);
+        secretTextView = (TextView) findViewById(R.id.textView2);
         appKeyPair = new AppKeyPair(Constants.CONSUMER_KEY, Constants.CONSUMER_SECRET);
         session = VDiskAuthSession.getInstance(this, appKeyPair, Session.AccessType.APP_FOLDER);
         session.setRedirectUrl(Constants.REDIRECT_URL);
@@ -78,12 +81,17 @@ public class TransformAndUploadActivity extends ActionBarActivity implements VDi
 //                uploadLargeFile(srcPath, desPath);
                 if (tranformState) {
                     tranformState = !tranformState;
-                    tranformedFilePath += "/" + random.nextInt();
+                    tranformedFilePath += "/" + random.nextInt(10000)+".jpg";
+                    Log.d("transformFIlePath", tranformedFilePath);
+                    TransformHelper.encryptJPEG(secretPath, coverPath, tranformedFilePath, "1");
                     // 执行transform变换函数
+                    Picasso.with(getApplicationContext()).load(new File(tranformedFilePath)).centerCrop().fit().into(secretImage);
+                    secretTextView.setText("变换后的图片");
+
                     button.setText(R.string.button_upload);
                 } else {
                     tranformState = !tranformState;
-                    String desPath = "/picture";
+                    String desPath = "/";
                     uploadLargeFile(tranformedFilePath,desPath);
                 }
             }
@@ -182,12 +190,12 @@ public class TransformAndUploadActivity extends ActionBarActivity implements VDi
                 switch (requestCode){
                     case REQUEST_CODE_IMAGE_SECRET: {
                         secretPath = path;
-                        Picasso.with(this).load(new File(path)).into(secretImage);
+                        Picasso.with(this).load(new File(path)).centerCrop().fit().into(secretImage);
                         break;
                     }
                     case REQUEST_CODE_IMAGE_COVER: {
                         coverPath = path;
-                        Picasso.with(this).load(new File(path)).into(coverImage);
+                        Picasso.with(this).load(new File(path)).centerCrop().fit().into(coverImage);
                         break;
                     }
                 }

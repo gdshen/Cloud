@@ -65,7 +65,6 @@ public class VdiskActivity extends ActionBarActivity implements VDiskDialogListe
         setContentView(R.layout.activity_vdisk);
 
 
-        //todo 进行微盘认证,进行下载
         appKeyPair = new AppKeyPair(Constants.CONSUMER_KEY, Constants.CONSUMER_SECRET);
         session = VDiskAuthSession.getInstance(this, appKeyPair, Session.AccessType.APP_FOLDER);
         session.setRedirectUrl(Constants.REDIRECT_URL);
@@ -76,7 +75,7 @@ public class VdiskActivity extends ActionBarActivity implements VDiskDialogListe
         mApi = new VDiskAPI<>(session);
 //        getAccountInfo(); 获取用户信息
         // todo 获取文件夹的信息
-        getMetaData("/picture",0);
+        getMetaData("/",0);
     }
 
 
