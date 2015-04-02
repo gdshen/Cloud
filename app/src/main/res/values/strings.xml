@@ -19,4 +19,8 @@
     <string name="choose_secret">请选择秘密图片</string>
     <string name="choose_cover">请选择掩体图片</string>
     <string name="button_tranform">变换</string>
+    <string name="title_activity_vdisk_detail">VdiskDetailActivity</string>
+    <string name="be_downloading">正在下载</string>
+    <string name="down_url">下载链接</string>
+    <string name="decrypt">解密</string>
 </resources>

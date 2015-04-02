@@ -62,6 +62,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="tk.gdshen.cloud.activities.VdiskActivity" />
         </activity>
+        <activity
+            android:name=".activities.VdiskDetailActivity"
+            android:label="@string/title_activity_vdisk_detail"
+            android:parentActivityName=".activities.VdiskGalleryActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="tk.gdshen.cloud.activities.VdiskGalleryActivity" />
+        </activity>
     </application>
 
 </manifest>

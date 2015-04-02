@@ -1,11 +1,15 @@
 package tk.gdshen.cloud.activities;
 
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.vdisk.android.VDiskAuthSession;
@@ -24,6 +28,7 @@ import java.util.List;
 import tk.gdshen.cloud.R;
 import tk.gdshen.cloud.adapters.VdiskAlbumAdapter;
 import tk.gdshen.cloud.helpers.Constants;
+import tk.gdshen.cloud.helpers.DownloadFile;
 
 public class VdiskGalleryActivity extends ActionBarActivity {
 
@@ -60,8 +65,19 @@ public class VdiskGalleryActivity extends ActionBarActivity {
         vdiskAlbumAdapter =
                 new VdiskAlbumAdapter(directoryDetailList, getApplicationContext());
         gridView.setAdapter(vdiskAlbumAdapter);
+        //todo 测试从微盘的缩略图跳转到全图的时候是否有问题
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String file = new File((String) adapterView.getItemAtPosition(i)).getName();
+                new DownloadFile(getApplicationContext(), mApi, file, Constants.localDetailImage + "/" + file);
+                Intent intent = new Intent(getApplicationContext(), VdiskDetailActivity.class);
+                intent.putExtra("filePath", file);
+                startActivity(intent);
+            }
+        });
 
-        list = getIntent().getStringArrayListExtra("result");
+        list = getIntent().getStringArrayListExtra("result"); //这里list是在微云上所有文件的名字
         for (int i = 0; i < list.size(); i++) {
             directoryDetailList.add(Constants.localThumbnail + list.get(i));
             downloadThumbnail(list.get(i));
@@ -121,5 +137,6 @@ public class VdiskGalleryActivity extends ActionBarActivity {
             }
         }.start();
     }
+
 
 }
