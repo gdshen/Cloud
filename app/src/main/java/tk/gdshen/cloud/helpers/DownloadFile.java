@@ -9,6 +9,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -25,6 +26,8 @@ import com.vdisk.net.exception.VDiskUnlinkedException;
 import com.vdisk.net.exception.VDiskDownloadFileExistException;
 
 import tk.gdshen.cloud.R;
+import tk.gdshen.cloud.activities.VdiskDetailActivity;
+import tk.gdshen.cloud.activities.VdiskGalleryActivity;
 
 /**
  * Here we show getting metadata for a directory and downloading a file in a
@@ -190,6 +193,9 @@ public class DownloadFile extends AsyncTask<Void, Long, Boolean> {
             // Couldn't download it, so show an error
             showToast(mErrorMsg);
         }
+//        Intent intent = new Intent(mContext, VdiskDetailActivity.class);
+//        intent.putExtra("filePath", file);
+//        mContext.startActivity(intent);
     }
 
     private void showToast(String msg) {

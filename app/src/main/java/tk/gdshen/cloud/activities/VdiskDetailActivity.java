@@ -49,8 +49,8 @@ public class VdiskDetailActivity extends ActionBarActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TransformHelper.DecryptJPEG(Constants.localDetailImage + "/decrypt" + filePath,
-                        Constants.localDetailImage + "/decrypt" + filePath, "1");
+                TransformHelper.DecryptJPEG(Constants.localDetailImage + "/" + filePath,
+                        Constants.localDetailImage + "/decrypt" + filePath, Constants.key);
                 Picasso.with(getApplicationContext()).
                         load(new File(Constants.localDetailImage + "/decrypt" + filePath)).centerCrop().fit().into(imageView);
             }

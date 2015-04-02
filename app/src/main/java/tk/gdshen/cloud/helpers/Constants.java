@@ -31,6 +31,8 @@ public class Constants {
 
     public static final String REDIRECT_URL = "http://www.ustc.edu.cn";
 
+    public static String key  = null;
+
     public static ArrayList<String> getFileList() {
         ArrayList<String> stringArrayList = new ArrayList<>();
         String imageDirectory = Environment.getExternalStorageDirectory().getAbsolutePath() + "/DCIM";

@@ -56,19 +56,11 @@
         </activity>
         <activity
             android:name=".activities.VdiskGalleryActivity"
-            android:label="@string/title_activity_vdisk_gallery"
-            android:parentActivityName=".activities.VdiskActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="tk.gdshen.cloud.activities.VdiskActivity" />
+            android:label="@string/title_activity_vdisk_gallery">
         </activity>
         <activity
             android:name=".activities.VdiskDetailActivity"
-            android:label="@string/title_activity_vdisk_detail"
-            android:parentActivityName=".activities.VdiskGalleryActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="tk.gdshen.cloud.activities.VdiskGalleryActivity" />
+            android:label="@string/title_activity_vdisk_detail">
         </activity>
     </application>
 

@@ -65,21 +65,26 @@ public class VdiskGalleryActivity extends ActionBarActivity {
         vdiskAlbumAdapter =
                 new VdiskAlbumAdapter(directoryDetailList, getApplicationContext());
         gridView.setAdapter(vdiskAlbumAdapter);
-        //todo 测试从微盘的缩略图跳转到全图的时候是否有问题
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String file = new File((String) adapterView.getItemAtPosition(i)).getName();
-                new DownloadFile(getApplicationContext(), mApi, file, Constants.localDetailImage + "/" + file);
-                Intent intent = new Intent(getApplicationContext(), VdiskDetailActivity.class);
-                intent.putExtra("filePath", file);
-                startActivity(intent);
+                file = "/" +file;
+                File fileDetail = new File(Constants.localDetailImage + "/" + file);
+                if(!fileDetail.exists()) {
+                    DownloadFile downloadFile = new DownloadFile(VdiskGalleryActivity.this, mApi, file, Constants.localDetailImage + "/" + file);
+                    downloadFile.execute();
+                }else {
+                    Intent intent = new Intent(getApplicationContext(), VdiskDetailActivity.class);
+                    intent.putExtra("filePath", file);
+                    startActivity(intent);
+                }
             }
         });
 
         list = getIntent().getStringArrayListExtra("result"); //这里list是在微云上所有文件的名字
         for (int i = 0; i < list.size(); i++) {
-            directoryDetailList.add(Constants.localThumbnail + list.get(i));
+            directoryDetailList.add(Constants.localThumbnail+"/" + list.get(i));
             downloadThumbnail(list.get(i));
         }
     }
@@ -114,7 +119,7 @@ public class VdiskGalleryActivity extends ActionBarActivity {
             public void run() {
                 FileOutputStream mFos = null;
                 try {
-                    String cachePath = Constants.localThumbnail
+                    String cachePath = Constants.localThumbnail + "/"
                             + path;
                     File file = new File(cachePath);
                     file.createNewFile();

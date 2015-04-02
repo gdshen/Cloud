@@ -1,12 +1,16 @@
 package tk.gdshen.cloud.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import java.io.File;
+import java.util.Random;
 
 import tk.gdshen.cloud.R;
 import tk.gdshen.cloud.helpers.Constants;
@@ -27,12 +31,36 @@ public class StartActivity extends Activity {
 
         fileCreator();
 
+        SharedPreferences sharedPreferences= getSharedPreferences("test",
+                Activity.MODE_PRIVATE);
+        String name =sharedPreferences.getString("key", null);
+        if(name == null) {
+            TelephonyManager telephonyManager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+            String imei = telephonyManager.getDeviceId();
+//        Log.d(Constants.TAG, imei);
+            Random random = new Random(System.currentTimeMillis());
+            for (int i = 0; i < 5; i++) {
+                imei += random.nextInt(10);
+            }
+            Log.d(Constants.TAG, imei);
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("key", imei);
+
+            editor.apply();
+            Constants.key = imei;
+
+        } else {
+            Constants.key = name;
+        }
+
+
         //作为启动界面跳转到主界面
-        new Handler().postDelayed(new Runnable(){
+        new Handler().postDelayed(new Runnable() {
 
             @Override
             public void run() {
-                Intent mainIntent = new Intent(StartActivity.this,AlbumActivity.class);
+                Intent mainIntent = new Intent(StartActivity.this, AlbumActivity.class);
                 StartActivity.this.startActivity(mainIntent);
                 StartActivity.this.finish();
             }
