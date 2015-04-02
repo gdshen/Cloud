@@ -87,7 +87,7 @@ public class TransformAndUploadActivity extends ActionBarActivity implements VDi
                     // 执行transform变换函数
                     Picasso.with(getApplicationContext()).load(new File(tranformedFilePath)).centerCrop().fit().into(secretImage);
                     secretTextView.setText("变换后的图片");
-
+                    Toast.makeText(getApplicationContext(),Constants.key,Toast.LENGTH_LONG).show();
                     button.setText(R.string.button_upload);
                 } else {
                     tranformState = !tranformState;

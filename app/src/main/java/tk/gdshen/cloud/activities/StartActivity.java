@@ -74,6 +74,7 @@ public class StartActivity extends Activity {
         File cloudDirectory = new File(Constants.cloud);
         File thumbnail = new File(Constants.localThumbnail);
         File imageDetail = new File(Constants.localDetailImage);
+        File decryptDirectory = new File(Constants.decryptDirectory);
 
         if( !cloudDirectory.exists()){
             cloudDirectory.mkdirs();
@@ -97,6 +98,14 @@ public class StartActivity extends Activity {
         }
         else{
             Log.d(Constants.TAG,Constants.localDetailImage + "文件夹已经创建");
+        }
+
+        if (!decryptDirectory.exists()) {
+            decryptDirectory.mkdirs();
+            Log.d(Constants.TAG, Constants.decryptDirectory + "已完成创建");
+        }
+        else {
+            Log.d(Constants.TAG, Constants.decryptDirectory + "已完成创建");
         }
 
     }

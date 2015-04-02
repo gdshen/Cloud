@@ -22,6 +22,8 @@ public class Constants {
 
     public final static String localDetailImage = cloud+ "/imageDetail";
 
+    public final static String decryptDirectory = localDetailImage + "/decrypt";
+
     public static ArrayList<String> fileList;
 
     //微盘登录认证的部分常量

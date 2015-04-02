@@ -2,11 +2,13 @@ package tk.gdshen.cloud.activities;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.vdisk.android.VDiskAuthSession;
@@ -44,15 +46,16 @@ public class VdiskDetailActivity extends ActionBarActivity {
         mApi.createDownloadDirFile(Constants.localDetailImage);
         filePath = getIntent().getStringExtra("filePath");
         imageView = (ImageView) findViewById(R.id.vdiskImageView);
-        Picasso.with(this).load(new File(Constants.localDetailImage + "/" +filePath)).centerCrop().fit().into(imageView);
+        Picasso.with(this).load(new File(Constants.localDetailImage +filePath)).centerCrop().fit().into(imageView);
         button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TransformHelper.DecryptJPEG(Constants.localDetailImage + "/" + filePath,
-                        Constants.localDetailImage + "/decrypt" + filePath, Constants.key);
+                Toast.makeText(getApplicationContext(),Constants.key,Toast.LENGTH_LONG).show();
+                TransformHelper.DecryptJPEG(Constants.localDetailImage + filePath,
+                        Constants.decryptDirectory + filePath, Constants.key);
                 Picasso.with(getApplicationContext()).
-                        load(new File(Constants.localDetailImage + "/decrypt" + filePath)).centerCrop().fit().into(imageView);
+                        load(new File(Constants.decryptDirectory + filePath)).centerCrop().fit().into(imageView);
             }
         });
     }

@@ -70,7 +70,7 @@ public class VdiskGalleryActivity extends ActionBarActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String file = new File((String) adapterView.getItemAtPosition(i)).getName();
                 file = "/" +file;
-                File fileDetail = new File(Constants.localDetailImage + "/" + file);
+                File fileDetail = new File(Constants.localDetailImage + file);
                 if(!fileDetail.exists()) {
                     DownloadFile downloadFile = new DownloadFile(VdiskGalleryActivity.this, mApi, file, Constants.localDetailImage + "/" + file);
                     downloadFile.execute();
