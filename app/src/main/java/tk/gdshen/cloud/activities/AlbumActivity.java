@@ -1,12 +1,16 @@
 package tk.gdshen.cloud.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AlertDialog;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -17,6 +21,7 @@ import tk.gdshen.cloud.adapters.AlbumAdapter;
 import tk.gdshen.cloud.helpers.Constants;
 
 public class AlbumActivity extends ActionBarActivity {
+    private String userInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +47,7 @@ public class AlbumActivity extends ActionBarActivity {
         connectVdiskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"点击了连接到我的微云", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"点击了连接到我的微盘", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(AlbumActivity.this, VdiskActivity.class);
                 startActivity(intent);
             }
@@ -75,6 +80,7 @@ public class AlbumActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+//            Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_LONG).show();
             return true;
         }
 

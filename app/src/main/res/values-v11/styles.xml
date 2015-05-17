@@ -1,15 +1,24 @@
 <resources>
 
-    <style name="FullscreenTheme" parent="android:Theme.Holo">
-        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowBackground">@null</item>
-        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
-        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/MyActionBar</item>
     </style>
 
-    <style name="FullscreenActionBarStyle" parent="android:Widget.Holo.ActionBar">
-        <item name="android:background">@color/black_overlay</item>
+    <style name="MyActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/primary_blue</item>
+        <!-- Support library compatibility -->
+        <item name="background">@color/primary_blue</item>
     </style>
 
+    <style name="FullscreenTheme" parent="@android:style/Theme.NoTitleBar.Fullscreen" />
+
+    <!--floating cation button-->
+    <style name="menu_labels_style">
+        <item name="android:background">@drawable/fab_label_background</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>

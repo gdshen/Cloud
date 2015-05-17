@@ -1,16 +1,21 @@
 package tk.gdshen.cloud.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +38,9 @@ import tk.gdshen.cloud.helpers.Constants;
 import tk.gdshen.cloud.helpers.LargeFileUpload;
 import tk.gdshen.cloud.helpers.TransformHelper;
 
-public class TransformAndUploadActivity extends ActionBarActivity implements VDiskDialogListener {
+import static java.lang.Thread.sleep;
+
+public class TransformAndUploadActivity extends AppCompatActivity implements VDiskDialogListener {
 
     VDiskAuthSession session;
     AppKeyPair appKeyPair;
@@ -53,6 +60,7 @@ public class TransformAndUploadActivity extends ActionBarActivity implements VDi
     String secretPath;
     String coverPath;
     String tranformedFilePath = Constants.cloud;
+    String userInput = Constants.key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +80,8 @@ public class TransformAndUploadActivity extends ActionBarActivity implements VDi
         final Button button = (Button) findViewById(R.id.upload_button);
 
         final Random random = new Random(System.currentTimeMillis());
+
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,18 +91,22 @@ public class TransformAndUploadActivity extends ActionBarActivity implements VDi
 //                uploadLargeFile(srcPath, desPath);
                 if (tranformState) {
                     tranformState = !tranformState;
-                    tranformedFilePath += "/" + random.nextInt(10000)+".jpg";
+                    tranformedFilePath += "/" + random.nextInt(10000) + ".jpg";
                     Log.d("transformFIlePath", tranformedFilePath);
-                    TransformHelper.EncryptJPEG(secretPath, coverPath, tranformedFilePath, Constants.key);
+
+
+                    Toast.makeText(getApplicationContext(), userInput, Toast.LENGTH_LONG).show();
+                    TransformHelper.EncryptJPEG(secretPath, coverPath, tranformedFilePath, userInput);
                     // 执行transform变换函数
                     Picasso.with(getApplicationContext()).load(new File(tranformedFilePath)).centerCrop().fit().into(secretImage);
                     secretTextView.setText("变换后的图片");
-                    Toast.makeText(getApplicationContext(),Constants.key,Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), Constants.key, Toast.LENGTH_LONG).show();
                     button.setText(R.string.button_upload);
                 } else {
                     tranformState = !tranformState;
+
                     String desPath = "/";
-                    uploadLargeFile(tranformedFilePath,desPath);
+                    uploadLargeFile(tranformedFilePath, desPath);
                 }
             }
         });
@@ -116,6 +130,23 @@ public class TransformAndUploadActivity extends ActionBarActivity implements VDi
                 startActivityForResult(intent, REQUEST_CODE_IMAGE_COVER);
             }
         });
+
+        final EditText txtUrl = new EditText(this);
+
+
+        new AlertDialog.Builder(this)
+                .setTitle("请输入图片加密的密码")
+                .setView(txtUrl)
+                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        userInput = txtUrl.getText().toString();
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                })
+                .show();
     }
 
 
@@ -187,7 +218,7 @@ public class TransformAndUploadActivity extends ActionBarActivity implements VDi
             if (cursor != null && cursor.moveToFirst()) {
                 String path = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA));
                 Log.d("get path", path);
-                switch (requestCode){
+                switch (requestCode) {
                     case REQUEST_CODE_IMAGE_SECRET: {
                         secretPath = path;
                         Picasso.with(this).load(new File(path)).centerCrop().fit().into(secretImage);
