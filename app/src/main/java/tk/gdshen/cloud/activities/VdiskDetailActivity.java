@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -65,7 +66,7 @@ public class VdiskDetailActivity extends ActionBarActivity {
         });
         final EditText txtUrl = new EditText(this);
 
-
+        txtUrl.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
         new AlertDialog.Builder(this)
                 .setTitle("请输入图片加密的密码")
                 .setView(txtUrl)
