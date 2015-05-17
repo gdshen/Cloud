@@ -31,10 +31,10 @@ public class StartActivity extends Activity {
 
         fileCreator();
 
-        SharedPreferences sharedPreferences= getSharedPreferences("test",
+        SharedPreferences sharedPreferences = getSharedPreferences("test",
                 Activity.MODE_PRIVATE);
-        String name =sharedPreferences.getString("key", null);
-        if(name == null) {
+        String name = sharedPreferences.getString("key", null);
+        if (name == null) {
             TelephonyManager telephonyManager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
             String imei = telephonyManager.getDeviceId();
 //        Log.d(Constants.TAG, imei);
@@ -68,43 +68,47 @@ public class StartActivity extends Activity {
         }, SPLASH_DISPLAY_LENGTH);
     }
 
-    private void fileCreator(){
+    private void fileCreator() {
 
         //在初始化的代码中加入对于应用程序相对应的文件夹是否存在的检测，如果不存在，就新建一个
         File cloudDirectory = new File(Constants.cloud);
         File thumbnail = new File(Constants.localThumbnail);
+        File originThumbnail = new File(Constants.originImageThumbnail);
         File imageDetail = new File(Constants.localDetailImage);
         File decryptDirectory = new File(Constants.decryptDirectory);
 
-        if( !cloudDirectory.exists()){
+        if (!cloudDirectory.exists()) {
             cloudDirectory.mkdirs();
             Log.d(Constants.TAG, Constants.cloud + "已完成创建");
-        }
-        else{
-            Log.d(Constants.TAG,Constants.cloud + "文件夹已经创建");
+        } else {
+            Log.d(Constants.TAG, Constants.cloud + "文件夹已经创建");
         }
 
-        if( !thumbnail.exists()){
+        if (!thumbnail.exists()) {
             thumbnail.mkdirs();
             Log.d(Constants.TAG, Constants.localThumbnail + "已完成创建");
-        }
-        else{
-            Log.d(Constants.TAG,Constants.localThumbnail + "文件夹已经创建");
+        } else {
+            Log.d(Constants.TAG, Constants.localThumbnail + "文件夹已经创建");
         }
 
-        if( !imageDetail.exists()){
+        if (!originThumbnail.exists()) {
+            originThumbnail.mkdirs();
+            Log.d(Constants.TAG, Constants.originImageThumbnail + "已完成创建");
+        } else {
+            Log.d(Constants.TAG, Constants.originImageThumbnail + "文件夹已经创建");
+        }
+
+        if (!imageDetail.exists()) {
             imageDetail.mkdirs();
             Log.d(Constants.TAG, Constants.localDetailImage + "已完成创建");
-        }
-        else{
-            Log.d(Constants.TAG,Constants.localDetailImage + "文件夹已经创建");
+        } else {
+            Log.d(Constants.TAG, Constants.localDetailImage + "文件夹已经创建");
         }
 
         if (!decryptDirectory.exists()) {
             decryptDirectory.mkdirs();
             Log.d(Constants.TAG, Constants.decryptDirectory + "已完成创建");
-        }
-        else {
+        } else {
             Log.d(Constants.TAG, Constants.decryptDirectory + "已完成创建");
         }
 

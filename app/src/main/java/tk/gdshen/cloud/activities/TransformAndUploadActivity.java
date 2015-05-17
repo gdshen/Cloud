@@ -3,6 +3,9 @@ package tk.gdshen.cloud.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
@@ -31,6 +34,9 @@ import com.vdisk.net.session.AppKeyPair;
 import com.vdisk.net.session.Session;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Random;
 
 import tk.gdshen.cloud.R;
@@ -101,6 +107,25 @@ public class TransformAndUploadActivity extends AppCompatActivity implements VDi
                     Picasso.with(getApplicationContext()).load(new File(tranformedFilePath)).centerCrop().fit().into(secretImage);
                     secretTextView.setText("变换后的图片");
                     Toast.makeText(getApplicationContext(), Constants.key, Toast.LENGTH_LONG).show();
+                    //todo 保存缩略图
+                    Bitmap bitmap = BitmapFactory.decodeFile(secretPath);
+
+                    bitmap = ThumbnailUtils.extractThumbnail(bitmap,200,320);
+                    File secretFile = new File(secretPath);
+                    File file = new File(Constants.originImageThumbnail + "/" + secretFile.getName());
+                    FileOutputStream fOut = null;
+                    try {
+                        fOut = new FileOutputStream(file);
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 85, fOut);
+                        fOut.flush();
+                        fOut.close();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
                     button.setText(R.string.button_upload);
                 } else {
                     tranformState = !tranformState;
